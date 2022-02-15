@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     TextView contenutoFile;
@@ -38,8 +39,9 @@ public class MainActivity extends AppCompatActivity {
         scrittura.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String risultato=gestore.readFile("fileDaLeggere.txt", getApplicationContext());
-                contenutoFile.setText(risultato);
+                //nomeFile inserito come prova per l'EditText
+                String risultato=gestore.writeFile("fileDaLeggere.txt", getApplicationContext(), nomeFile.getText().toString());
+                Toast.makeText(getApplicationContext(), risultato, Toast.LENGTH_LONG).show();
             }
         });
     }
