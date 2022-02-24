@@ -1,6 +1,7 @@
 package com.example.filemanager;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.util.Log;
 
@@ -97,6 +98,25 @@ public class GestioneFIle {
         InputStream is=res.openRawResource(R.raw.brani);
         BufferedReader br=new BufferedReader(new InputStreamReader(is));
         try {
+            while((testo=br.readLine())!=null) {
+                sb.append(testo + "\n");
+            }
+        } catch (IOException e) {
+            Log.e(TAG, "I/O Exception");
+            e.printStackTrace();
+        }
+        return sb.toString();
+    }
+
+    public String leggiAssetsFile(Context c) {
+        String testo;
+        StringBuilder sb=new StringBuilder();
+        AssetManager asset=c.getAssets();
+        //InputStream is=asset.open("prova");
+        //BufferedReader br=new BufferedReader(new InputStreamReader(is));
+        try {
+            InputStream is=asset.open("prova.txt");
+            BufferedReader br=new BufferedReader(new InputStreamReader(is));
             while((testo=br.readLine())!=null) {
                 sb.append(testo + "\n");
             }
