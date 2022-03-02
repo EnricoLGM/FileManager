@@ -14,15 +14,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-public class GestioneFIle {
+public class GestioneFile {
     String nomeFile;
     String TAG="Eccezioni";
 
-    public GestioneFIle() {
+    public GestioneFile() {
         //Costruttore vuoto per non inserire il nome del file
     }
 
-    public GestioneFIle(String nomeFile) {
+    public GestioneFile(String nomeFile) {
         this.nomeFile = nomeFile;
     }
 

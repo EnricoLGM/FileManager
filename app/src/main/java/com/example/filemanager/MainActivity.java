@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     Button assets;
     Button raw;
 
-    GestioneFIle gestore;
+    GestioneFile gestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         raw=(Button) findViewById(R.id.raw);
         assets=(Button) findViewById(R.id.assets);
 
-        gestore = new GestioneFIle();
+        gestore = new GestioneFile();
 
         lettura.setOnClickListener(new View.OnClickListener() {
             @Override
