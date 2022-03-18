@@ -58,11 +58,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        raw.setOnClickListener(new View.OnClickListener() {
+        /*raw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String risultato=gestore.leggiRawFile(getApplicationContext());
                 contenutoFile.setText(risultato);
+            }
+        });*/
+
+        //Prova di lettura da JSON
+        raw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Brano risultato=gestore.leggiFileJSON(getApplicationContext(), R.raw.prova_brani);
+                contenutoFile.setText(risultato.toString());
             }
         });
     }

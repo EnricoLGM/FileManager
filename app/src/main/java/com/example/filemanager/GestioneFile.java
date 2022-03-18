@@ -5,6 +5,9 @@ import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.util.Log;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -108,6 +111,23 @@ public class GestioneFile {
         return sb.toString();
     }
 
+    public String leggiRawFile(Context c, int id) {
+        String testo;
+        StringBuilder sb=new StringBuilder();
+        Resources res=c.getResources();
+        InputStream is=res.openRawResource(id);
+        BufferedReader br=new BufferedReader(new InputStreamReader(is));
+        try {
+            while((testo=br.readLine())!=null) {
+                sb.append(testo + "\n");
+            }
+        } catch (IOException e) {
+            Log.e(TAG, "I/O Exception");
+            e.printStackTrace();
+        }
+        return sb.toString();
+    }
+
     public String leggiAssetsFile(Context c) {
         String testo;
         StringBuilder sb=new StringBuilder();
@@ -125,5 +145,28 @@ public class GestioneFile {
             e.printStackTrace();
         }
         return sb.toString();
+    }
+
+    public Brano leggiFileJSON(Context c, int id) {
+        //lettura del file da raw
+        String content=leggiRawFile(c,id);
+        String titolo="";
+        String autore="";
+        String data="";
+        String durata="";
+        String genere="";
+        try {
+            JSONObject jsonObj=new JSONObject(content);
+            //prova per prendere i dati da un oggetto
+            //titolo=jsonObj.getJSONArray("brano").getString(0);
+            titolo=jsonObj.getString("titolo");
+            autore=jsonObj.getString("autore");
+            data=jsonObj.getString("dataUscita");
+            durata=jsonObj.getString("durata");
+            genere=jsonObj.getString("genere");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return new Brano(titolo, autore, data, durata, genere);
     }
 }
